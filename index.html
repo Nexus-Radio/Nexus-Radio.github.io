@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus Radio</title>
+    <meta name="description" content="Bienvenue sur Nexus Radio, ton univers musical en ligne !">
+    <meta name="keywords" content="radio, musique, en ligne, streaming, Nexus Radio">
+    <meta name="author" content="Nexus Radio Team">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -50,14 +54,14 @@
         iframe {
             border-radius: 15px;
             box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         iframe:hover {
             transform: scale(1.05);
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.5);
         }
 
-        /* Background animation */
         .background-animation {
             position: absolute;
             width: 200%;
@@ -69,7 +73,6 @@
             z-index: 1;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -109,13 +112,13 @@
 
     <div class="background-animation"></div>
 
-    <div class="container">
+    <main class="container">
         <h1>Bienvenue sur Nexus Radio</h1>
         <p>Ton univers, ta radio</p>
         <iframe src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2" 
-                style="width: 275px; height: 365px;" frameBorder="0"></iframe>
+                style="width: 275px; height: 365px;" frameBorder="0" title="Lecteur Nexus Radio"></iframe>
         <script type="text/javascript" src="https://player.radioking.io/scripts/iframe.bundle.js"></script>
-    </div>
+    </main>
 
 </body>
 
