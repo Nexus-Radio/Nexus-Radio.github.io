@@ -60,32 +60,12 @@
             width: 100%;
             max-width: 400px;
             height: 400px;
+            display: block; /* Affiche l'iframe directement */
         }
 
         iframe:hover {
             transform: scale(1.05);
             box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.6);
-        }
-
-        button {
-            font-size: 1.2em;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            background: #1e7fcb;
-            color: #ffffff;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        button:hover {
-            background: #105c99;
-            transform: translateY(-3px);
-        }
-
-        button:focus {
-            outline: 2px solid #ffffff;
         }
 
         .background-animation {
@@ -156,16 +136,8 @@
     <main class="container">
         <h1>Bienvenue sur Nexus Radio</h1>
         <p>Ton univers, ta radio</p>
-        <button onclick="toggleRadio()">Lancer la Radio</button>
         <iframe id="radio-player" src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2" 
-                style="display:none;" frameborder="0" title="Lecteur Nexus Radio"></iframe>
-        <script type="text/javascript" src="https://player.radioking.io/scripts/iframe.bundle.js"></script>
-        <script>
-            function toggleRadio() {
-                var player = document.getElementById('radio-player');
-                player.style.display = player.style.display === 'none' ? 'block' : 'none';
-            }
-        </script>
+                frameborder="0" title="Lecteur Nexus Radio"></iframe>
     </main>
 
 </body>
