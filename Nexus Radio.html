@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Radio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --main-bg-color: linear-gradient(135deg, #1e7fcb, #1a3c7c);
+            --container-bg-color: rgba(0, 0, 0, 0.6);
+            --text-color: #ffffff;
+            --subtext-color: #d0d0d0;
+            --primary-shadow-color: rgba(255, 255, 255, 0.5);
+            --secondary-shadow-color: rgba(0, 0, 0, 0.5);
+            --highlight-color: rgba(30, 127, 203, 0.4);
+            --radius: 15px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--main-bg-color);
+            color: var(--text-color);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        main {
+            background: var(--container-bg-color);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0px 0px 20px 0px var(--secondary-shadow-color);
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            z-index: 2;
+            max-width: 90%;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            text-shadow: 0 0 10px var(--primary-shadow-color);
+            animation: pulse 2s infinite;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--subtext-color);
+        }
+
+        iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3 / 4;
+            border-radius: var(--radius);
+            box-shadow: 0px 0px 20px 0px var(--secondary-shadow-color);
+            transition: transform 0.3s ease;
+        }
+
+        iframe:hover {
+            transform: scale(1.05);
+        }
+
+        .background-animation {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, var(--highlight-color), transparent 70%);
+            animation: rotate 10s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                text-shadow: 0 0 10px var(--primary-shadow-color);
+            }
+
+            50% {
+                text-shadow: 0 0 20px var(--text-color);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-animation"></div>
+
+    <main>
+        <h1>Bienvenue sur Nexus Radio</h1>
+        <p>Ton univers, ta radio</p>
+        <iframe src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2"
+                frameborder="0" aria-label="Nexus Radio Player"></iframe>
+        <script type="text/javascript" src="https://player.radioking.io/scripts/iframe.bundle.js"></script>
+    </main>
+
+</body>
+
+</html>
