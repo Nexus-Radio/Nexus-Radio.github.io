@@ -28,38 +28,64 @@
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.6);
             animation: fadeIn 1.5s ease-in-out;
             position: relative;
             z-index: 2;
+            max-width: 90%;
+            box-sizing: border-box;
         }
 
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+            font-size: 3em;
+            margin-bottom: 20px;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: pulse 2s infinite;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            animation: pulse 2.5s infinite;
         }
 
         p {
-            font-size: 1.2em;
-            margin-bottom: 25px;
+            font-size: 1.4em;
+            margin-bottom: 30px;
             color: #d0d0d0;
         }
 
         iframe {
-            border-radius: 15px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
         }
 
         iframe:hover {
             transform: scale(1.05);
-            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: #1e7fcb;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        button:hover {
+            background: #105c99;
+            transform: translateY(-3px);
+        }
+
+        button:focus {
+            outline: 2px solid #ffffff;
         }
 
         .background-animation {
@@ -68,8 +94,8 @@
             height: 200%;
             top: -50%;
             left: -50%;
-            background: radial-gradient(circle, rgba(30, 127, 203, 0.4), transparent 70%);
-            animation: rotate 10s linear infinite;
+            background: radial-gradient(circle, rgba(30, 127, 203, 0.3), transparent 70%);
+            animation: rotate 15s linear infinite;
             z-index: 1;
         }
 
@@ -88,7 +114,7 @@
         @keyframes pulse {
             0%,
             100% {
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
             }
 
             50% {
@@ -105,6 +131,21 @@
                 transform: rotate(360deg);
             }
         }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2em;
+            }
+
+            p {
+                font-size: 1.1em;
+            }
+
+            iframe {
+                width: 100%;
+                height: 300px;
+            }
+        }
     </style>
 </head>
 
@@ -115,9 +156,16 @@
     <main class="container">
         <h1>Bienvenue sur Nexus Radio</h1>
         <p>Ton univers, ta radio</p>
-        <iframe src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2" 
-                style="width: 275px; height: 365px;" frameBorder="0" title="Lecteur Nexus Radio"></iframe>
+        <button onclick="toggleRadio()">Lancer la Radio</button>
+        <iframe id="radio-player" src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2" 
+                style="display:none;" frameborder="0" title="Lecteur Nexus Radio"></iframe>
         <script type="text/javascript" src="https://player.radioking.io/scripts/iframe.bundle.js"></script>
+        <script>
+            function toggleRadio() {
+                var player = document.getElementById('radio-player');
+                player.style.display = player.style.display === 'none' ? 'block' : 'none';
+            }
+        </script>
     </main>
 
 </body>
