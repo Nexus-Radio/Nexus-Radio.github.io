@@ -155,7 +155,7 @@
     <div class="container" role="main">
         <h1>Bienvenue sur Nexus Radio</h1>
         <p>Ton univers, ta radio</p>
-        <iframe id="radio-player" src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2" 
+        <iframe id="radio-player" src="https://listen.radioking.com/radio/679306/stream/743671" 
                 frameborder="0" title="Lecteur Nexus Radio"></iframe>
         <div id="equalizer-root"></div>
         <div class="visualizer">
@@ -176,7 +176,6 @@
                 this.analyser = null;
                 this.canvas = React.createRef();
                 this.canvasContext = null;
-                this.frequencyBars = [];
                 this.state = {
                     filters: []
                 };
@@ -192,7 +191,7 @@
 
             setupAudioContext() {
                 this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                this.audioElement = new Audio('https://listen.radioking.com/radio/679306/stream/743671'); // Remplacez par le flux réel
+                this.audioElement = new Audio('https://listen.radioking.com/radio/679306/stream/743671');
                 this.audioElement.crossOrigin = "anonymous";
                 this.audioElement.play();
 
@@ -200,10 +199,13 @@
                 this.analyser = this.audioContext.createAnalyser();
                 this.analyser.fftSize = 256;
                 source.connect(this.analyser);
+                this.analyser.connect(this.audioContext.destination);
             }
 
             setupCanvas() {
                 this.canvasContext = this.canvas.current.getContext('2d');
+                this.canvas.current.width = window.innerWidth;
+                this.canvas.current.height = 150;
             }
 
             createFilters() {
@@ -220,7 +222,7 @@
                 filters.reduce((prev, curr) => {
                     prev.connect(curr);
                     return curr;
-                }).connect(this.analyser).connect(this.audioContext.destination);
+                }).connect(this.analyser);
 
                 this.setState({ filters });
             }
@@ -250,7 +252,7 @@
                 let barHeight;
                 let x = 0;
 
-                for(let i = 0; i < bufferLength; i++) {
+                for (let i = 0; i < bufferLength; i++) {
                     barHeight = dataArray[i];
                     this.canvasContext.fillStyle = `rgb(${barHeight + 100},50,50)`;
                     this.canvasContext.fillRect(x, this.canvas.current.height - barHeight / 2, barWidth, barHeight / 2);
