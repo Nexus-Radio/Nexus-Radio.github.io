@@ -82,6 +82,32 @@
             animation: gradient 15s ease infinite;
         }
 
+        .visualizer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 1;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .equalizer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .equalizer input[type=range] {
+            width: 15%;
+            transform: rotate(-90deg);
+        }
+
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
@@ -116,6 +142,9 @@
                 width: 100%;
                 height: 300px;
             }
+            .equalizer input[type=range] {
+                width: 20%;
+            }
         }
     </style>
 </head>
@@ -129,6 +158,9 @@
         <iframe id="radio-player" src="https://player.radioking.io/nexus-radio1/?c=%231e7fcb&c2=%23ffffff&f=v&i=1&p=1&s=1&li=1&popup=1&plc=1&h=365&l=275&v=2" 
                 frameborder="0" title="Lecteur Nexus Radio"></iframe>
         <div id="equalizer-root"></div>
+        <div class="visualizer">
+            <canvas id="visualizer-canvas"></canvas>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
@@ -136,12 +168,117 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
     <script type="text/babel">
-        const AudioEqualizer = () => {
-            // Copiez ici le contenu du composant AudioEqualizer
-        };
+        class AudioEqualizer extends React.Component {
+            constructor(props) {
+                super(props);
+                this.audioContext = null;
+                this.audioElement = null;
+                this.analyser = null;
+                this.canvas = React.createRef();
+                this.canvasContext = null;
+                this.frequencyBars = [];
+                this.state = {
+                    filters: []
+                };
+            }
+
+            componentDidMount() {
+                this.setupAudioContext();
+                this.setupCanvas();
+                this.createFilters();
+                this.connectAudio();
+                this.drawVisualizer();
+            }
+
+            setupAudioContext() {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                this.audioElement = new Audio('https://streaming-url'); // Remplacez par le flux réel
+                this.audioElement.crossOrigin = "anonymous";
+                this.audioElement.play();
+
+                const source = this.audioContext.createMediaElementSource(this.audioElement);
+                this.analyser = this.audioContext.createAnalyser();
+                this.analyser.fftSize = 256;
+                source.connect(this.analyser);
+            }
+
+            setupCanvas() {
+                this.canvasContext = this.canvas.current.getContext('2d');
+            }
+
+            createFilters() {
+                const frequencies = [60, 170, 350, 1000, 3500, 10000];
+                const filters = frequencies.map(frequency => {
+                    const filter = this.audioContext.createBiquadFilter();
+                    filter.type = 'peaking';
+                    filter.frequency.value = frequency;
+                    filter.Q.value = 1;
+                    filter.gain.value = 0;
+                    return filter;
+                });
+
+                filters.reduce((prev, curr) => {
+                    prev.connect(curr);
+                    return curr;
+                }).connect(this.analyser).connect(this.audioContext.destination);
+
+                this.setState({ filters });
+            }
+
+            connectAudio() {
+                const audio = document.getElementById('radio-player');
+                audio.onplay = () => {
+                    this.audioContext.resume();
+                };
+            }
+
+            changeGain(index, value) {
+                const filters = this.state.filters;
+                filters[index].gain.value = value;
+                this.setState({ filters });
+            }
+
+            drawVisualizer() {
+                requestAnimationFrame(this.drawVisualizer.bind(this));
+                const bufferLength = this.analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+                this.analyser.getByteFrequencyData(dataArray);
+
+                this.canvasContext.clearRect(0, 0, this.canvas.current.width, this.canvas.current.height);
+
+                const barWidth = (this.canvas.current.width / bufferLength) * 2.5;
+                let barHeight;
+                let x = 0;
+
+                for(let i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i];
+                    this.canvasContext.fillStyle = `rgb(${barHeight + 100},50,50)`;
+                    this.canvasContext.fillRect(x, this.canvas.current.height - barHeight / 2, barWidth, barHeight / 2);
+
+                    x += barWidth + 1;
+                }
+            }
+
+            render() {
+                return (
+                    <div className="equalizer">
+                        {this.state.filters.map((filter, index) => (
+                            <input
+                                key={index}
+                                type="range"
+                                min="-30"
+                                max="30"
+                                value={filter.gain.value}
+                                step="1"
+                                onChange={(e) => this.changeGain(index, e.target.value)}
+                            />
+                        ))}
+                    </div>
+                );
+            }
+        }
 
         ReactDOM.render(<AudioEqualizer />, document.getElementById('equalizer-root'));
     </script>
-    
 </body>
 </html>
