@@ -11,7 +11,9 @@ class Game {
         this.container.innerHTML = `
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 300px; height: 300px;">
                 ${this.colors.map(color => `
-                    <div class="simon-button" style="background-color: ${color}; border-radius: 50%; cursor: pointer;"></div>
+                    <div class="simon-button" style="background-color: ${color}; border-radius: 50%; cursor: pointer; position: relative; overflow: hidden;">
+                        <div class="halo" style="position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; background: radial-gradient(circle, ${color} 0%, transparent 70%); opacity: 0; transition: opacity 0.3s;"></div>
+                    </div>
                 `).join('')}
             </div>
             <div id="status" style="margin-top: 20px;">Appuyez sur une couleur pour commencer</div>
@@ -42,9 +44,14 @@ class Game {
 
     flash(index) {
         const button = this.container.querySelectorAll('.simon-button')[index];
-        button.style.opacity = '0.5';
+        const halo = button.querySelector('.halo');
+        halo.style.opacity = '1';
+        button.style.transform = 'scale(1.1)';
+        button.style.zIndex = '1';
         setTimeout(() => {
-            button.style.opacity = '1';
+            halo.style.opacity = '0';
+            button.style.transform = 'scale(1)';
+            button.style.zIndex = '0';
         }, 500);
     }
 
