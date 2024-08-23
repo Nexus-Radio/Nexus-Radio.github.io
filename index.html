@@ -15,10 +15,9 @@
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
+            min-height: 100vh;
             font-family: 'Poppins', sans-serif;
             color: #fff;
-            overflow: hidden;
             position: relative;
             text-align: center;
         }
@@ -35,15 +34,25 @@
             z-index: -1;
         }
 
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
         .container {
             background: rgba(0, 0, 0, 0.7);
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.6);
             max-width: 90%;
-            margin: auto;
-            margin-top: 10%;
+            width: 100%;
             box-sizing: border-box;
+            margin: 20px 0;
         }
 
         h1 {
@@ -109,26 +118,34 @@
                 text-shadow: 0 0 20px rgba(255, 255, 255, 1);
             }
         }
+
+        @media (max-height: 600px) {
+            .main-content {
+                justify-content: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="background-animation"></div>
 
-    <div class="container">
-        <h1>Bienvenue sur Nexus Team</h1>
-        <div class="button-container">
-            <a href="radio.html" class="button" target="_blank">
-                <img src="radio.png" alt="Radio Icon"> Écouter Nexus Radio
-            </a>
-            <a href="daily-game.html" class="button">
-                <img src="game.png" alt="Game Icon"> Découvrir le Jeu du Jour
-            </a>
-            <a href="https://discord.gg/YDWexkVAj3" class="button" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/ffffff/discord-logo.png" alt="Discord Icon"> Rejoindre le Discord
-            </a>
-            <a href="https://www.youtube.com/@NexusMathias39" class="button" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/ffffff/youtube-play.png" alt="YouTube Icon"> Abonnez-vous à la chaine YouTube de Nexus Mathias
-            </a>
+    <div class="main-content">
+        <div class="container">
+            <h1>Bienvenue sur Nexus Team</h1>
+            <div class="button-container">
+                <a href="radio.html" class="button" target="_blank">
+                    <img src="radio.png" alt="Radio Icon"> Écouter Nexus Radio
+                </a>
+                <a href="game.html" class="button">
+                    <img src="game.png" alt="Game Icon"> Découvrir nos jeux
+                </a>
+                <a href="https://discord.gg/YDWexkVAj3" class="button" target="_blank">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/discord-logo.png" alt="Discord Icon"> Rejoindre le Discord
+                </a>
+                <a href="https://www.youtube.com/@NexusMathias39" class="button" target="_blank">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/youtube-play.png" alt="YouTube Icon"> Abonnez-vous à la chaine YouTube de Nexus Mathias
+                </a>
+            </div>
         </div>
     </div>
 </body>
