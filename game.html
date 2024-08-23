@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Team - Jeux</title>
+    <meta name="description" content="Découvrez nos jeux du jour et nos jeux constants sur Nexus Team.">
+    <meta name="keywords" content="Nexus Team, Jeux du Jour, Jeux Constants, jeux en ligne">
+    <meta name="author" content="TheR0001">
+
+    <!-- Import de la police Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.6);
+            max-width: 90%;
+            margin: auto;
+            margin-top: 10%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            animation: pulse 2.5s infinite;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .button {
+            background-color: rgba(76, 175, 80, 0.8);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.1s;
+            display: inline-block;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .button:hover {
+            background-color: rgba(69, 160, 73, 0.9);
+            transform: scale(1.05);
+        }
+
+        .button img {
+            width: 24px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <div class="container">
+        <h1>Jeux Nexus Team</h1>
+        <div class="button-container">
+            <a href="daily-game.html" class="button">
+                <img src="game.png" alt="Game Icon"> Jeux du Jour
+            </a>
+            <a href="constant-games.html" class="button">
+                <img src="gamepad.png" alt="Gamepad Icon"> Jeux Constants
+            </a>
+        </div>
+    </div>
+</body>
+</html>
