@@ -3,150 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Team - Accueil</title>
-    <meta name="description" content="Découvrez Nexus Radio, jouez à Nexus Pong, découvrez le Jeu du Jour et rejoignez notre communauté sur Discord et YouTube.">
-    <meta name="keywords" content="Nexus Radio, Nexus Pong, Jeu du Jour, Discord, YouTube, jeux, musique">
-    <meta name="author" content="TheR0001">
-
-    <!-- Import de la police Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
-
+    <title>HarmoniaStream - Vibrez au rythme de l'harmonie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body, html {
+        :root {
+            --primary-color: #1D3557;
+            --secondary-color: #457B9D;
+            --accent-color: #E63946;
+            --background-color: #F1FAEE;
+            --text-color: #2D4059;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
             min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: #fff;
-            position: relative;
-            text-align: center;
-        }
-
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            z-index: -1;
-        }
-
-        .main-content {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
         }
 
-        .container {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.6);
-            max-width: 90%;
-            width: 100%;
-            box-sizing: border-box;
-            margin: 20px 0;
+        header {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            animation: pulse 2.5s infinite;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        .button-container {
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        main {
+            flex-grow: 1;
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: center;
             align-items: center;
+            padding: 2rem;
         }
 
-        .button {
-            background-color: rgba(76, 175, 80, 0.8);
-            border: none;
-            color: white;
-            padding: 15px 30px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 18px;
-            margin: 10px 0;
-            cursor: pointer;
+        .player {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .album-cover {
+            width: 100%;
             border-radius: 10px;
-            transition: background-color 0.3s, transform 0.1s;
-            display: inline-block;
-            width: 80%;
-            max-width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .button:hover {
-            background-color: rgba(69, 160, 73, 0.9);
-            transform: scale(1.05);
+        .track-info {
+            margin-top: 1.5rem;
+            text-align: center;
         }
 
-        .button img {
-            width: 24px;
-            vertical-align: middle;
-            margin-right: 8px;
+        #track-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        #artist-name {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-top: 0;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-            }
-            50% {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 1);
-            }
+        .controls, .audio-effects {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
 
-        @media (max-height: 600px) {
-            .main-content {
-                justify-content: flex-start;
+        button {
+            background-color: var(--background-color);
+            border: none;
+            border-radius: 50px;
+            color: var(--primary-color);
+            padding: 0.8rem 1.2rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+        }
+
+        #play-pause {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+        }
+
+        #play-pause:hover {
+            background-color: #c62f3b;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 1rem 0;
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            margin-top: -5px;
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            background: #ddd;
+            border-radius: 3px;
+        }
+
+        .stats {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .player {
+                padding: 1.5rem;
+            }
+
+            button {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-animation"></div>
+    <header>
+        <h1>HarmoniaStream</h1>
+        <p class="tagline">Vibrez au rythme de l'harmonie</p>
+    </header>
 
-    <div class="main-content">
-        <div class="container">
-            <h1>Bienvenue sur Nexus Team</h1>
-            <div class="button-container">
-                <a href="radio.html" class="button" target="_blank">
-                    <img src="radio.png" alt="Radio Icon"> Écouter Nexus Radio
-                </a>
-                <a href="game.html" class="button">
-                    <img src="game.png" alt="Game Icon"> Découvrir nos jeux
-                </a>
-                <a href="https://discord.gg/YDWexkVAj3" class="button" target="_blank">
-                    <img src="https://img.icons8.com/material-outlined/24/ffffff/discord-logo.png" alt="Discord Icon"> Rejoindre le Discord
-                </a>
-                <a href="https://www.youtube.com/@NexusMathias39" class="button" target="_blank">
-                    <img src="https://img.icons8.com/material-outlined/24/ffffff/youtube-play.png" alt="YouTube Icon"> Abonnez-vous à la chaine YouTube de Nexus Mathias
-                </a>
+    <main>
+        <div class="player">
+            <img src="/api/placeholder/400/400" alt="Album Cover" class="album-cover">
+            <div class="track-info">
+                <h2 id="track-title">Titre de la chanson</h2>
+                <p id="artist-name">Nom de l'artiste</p>
             </div>
+            <div class="controls">
+                <button id="play-pause">Lecture/Pause</button>
+                <input type="range" id="volume-control" min="0" max="100" value="50">
+            </div>
+            <div class="audio-effects">
+                <button id="bass-boost">Bass Boost</button>
+                <button id="treble-boost">Treble Boost</button>
+                <button id="loudness">Loudness</button>
+                <button id="dolby-atmos">Dolby Atmos</button>
+            </div>
+            <button id="download">Télécharger</button>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>Auditeurs en temps réel : <span id="listener-count">0</span></p>
+        <p>&copy; 2024 HarmoniaStream. Tous droits réservés.</p>
+    </footer>
 </body>
+    <script src="script.js"></script>
 </html>
