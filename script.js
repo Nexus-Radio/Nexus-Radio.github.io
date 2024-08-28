@@ -24,30 +24,26 @@ const listenerCount = document.getElementById('listener-count');
 // Fonction pour charger la liste des fichiers audio du dossier 'music'
 async function loadMusicFiles() {
     try {
-        const response = await fetch('music/');
+        // Remplacez 'OWNER' et 'REPO' par les valeurs appropriées de votre dépôt GitHub
+        const response = await fetch('https://api.github.com/repos/OWNER/REPO/contents/music');
         if (!response.ok) throw new Error('Erreur lors du chargement des fichiers');
-        const text = await response.text();
-        const parser = new DOMParser();
-        const htmlDoc = parser.parseFromString(text, 'text/html');
-        const links = htmlDoc.querySelectorAll('a');
-        
-        tracks = Array.from(links)
-            .filter(link => link.href.endsWith('.mp3'))
-            .map(link => ({
-                title: link.textContent.replace('.mp3', ''),
+        const files = await response.json();
+        tracks = files
+            .filter(file => file.name.endsWith('.mp3'))
+            .map(file => ({
+                title: file.name.replace('.mp3', ''),
                 artist: 'Artiste Inconnu',
-                cover: `/api/placeholder/300/300?text=${encodeURIComponent(link.textContent.replace('.mp3', ''))}`,
-                file: `music/${link.textContent}`
+                cover: `/api/placeholder/300/300?text=${encodeURIComponent(file.name.replace('.mp3', ''))}`,
+                file: file.download_url
             }));
-
         if (tracks.length === 0) throw new Error('Aucun fichier audio trouvé');
         loadRandomTrack();
     } catch (error) {
         console.error('Erreur lors du chargement des fichiers musicaux:', error);
         // Fallback sur une liste prédéfinie en cas d'erreur
         tracks = [
-            { title: "Sample Track 1", artist: "Sample Artist", cover: "/api/placeholder/300/300?text=Sample+Track+1", file: "music/sample1.mp3" },
-            { title: "Sample Track 2", artist: "Sample Artist", cover: "/api/placeholder/300/300?text=Sample+Track+2", file: "music/sample2.mp3" }
+            { title: "Mona Lisa Feat. JSX", artist: "Booba", cover: "/api/placeholder/300/300?text=Sample+Track+1", file: "https://example.com/sample1.mp3" },
+            { title: "Sample Track 2", artist: "Sample Artist", cover: "/api/placeholder/300/300?text=Sample+Track+2", file: "https://example.com/sample2.mp3" }
         ];
         loadRandomTrack();
     }
